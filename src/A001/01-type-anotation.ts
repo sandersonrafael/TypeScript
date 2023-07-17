@@ -10,6 +10,8 @@ let adulto: boolean = true; //
 let simbolo: symbol = Symbol('qualquer símbolo'); //
 // let big: bigint = 10n; //
 
+// dica: somente tipar se o TS indicar que o tipo é any, ou sem tipo específico
+
 // Arrays
 
 let arrayOfNumbers: Array<number> = [1, 2, 3]; // ou ->
@@ -30,9 +32,14 @@ let pessoa: {
   adulto: true,
 };
 
-// Functions
+/* Functions */
 
+// expression
 function sum(x: number, y: number)/*: number */ { // retorno é opcional, pois o ts infere
   return x + y;
 }
 const result = sum(2, 2);
+
+// arrow
+const sum2: (x: number, y: number) => number = (x, y) => x + y; //ou
+const sum3 = (x: number, y: number) => x + y;
