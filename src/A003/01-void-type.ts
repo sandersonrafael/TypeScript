@@ -1,4 +1,15 @@
 function noReturn(...args: string[]): void {
   console.log(args.join(' '));
 }
-noReturn('123', '1', '3', '4');
+
+export const pessoa = {
+  nome: 'Rafael',
+  sobrenome: 'Ferreira',
+
+  showName(): void {
+    console.log(this.nome + ' ' + this.sobrenome);
+  },
+};
+
+noReturn('fulano', 'da silva');
+pessoa.showName();
