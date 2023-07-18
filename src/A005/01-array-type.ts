@@ -10,3 +10,10 @@ function concatStrings(...args: string[]) {
 }
 
 console.log(concatStrings('ok ', 'meu querido', ' e', ' prezado ', 'amigo.'));
+
+// somente leitura -> arrays que não podem ser editados ou alterados nem com métodos:
+
+const arrayName1: readonly string[] = ['Sanderson', 'Rafael'];
+const arrayName2: ReadonlyArray<string> = ['Sanderson', 'Rafael'];
+
+console.log(arrayName1, arrayName2);
