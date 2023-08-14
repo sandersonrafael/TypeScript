@@ -1,0 +1,2 @@
+(()=>{"use strict";var r={214:()=>{console.log("Sou um módulo")}},o={};!function t(e){var s=o[e];if(void 0!==s)return s.exports;var u=o[e]={exports:{}};return r[e](u,u.exports,t),u.exports}(214)})();
+//# sourceMappingURL=bundle.js.map
