@@ -1,5 +1,5 @@
 {
-  "name": "typesscript",
+  "name": "typescript",
   "version": "1.0.0",
   "description": "My personal repository to learn and pratice TypeScript",
   "main": "index.js",
@@ -7,12 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -w",
     "build-front": "webpack",
-    "build-back": "tsc",
+    "build-back": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/validator": "^13.11.1",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "eslint": "^8.45.0",
@@ -24,5 +25,8 @@
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "validator": "^13.11.0"
   }
 }
