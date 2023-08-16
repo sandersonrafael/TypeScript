@@ -9,14 +9,16 @@ const email = document.querySelector('.email') as HTMLInputElement;
 const password = document.querySelector('.password') as HTMLInputElement;
 const password2 = document.querySelector('.password2') as HTMLInputElement;
 
-form.addEventListener('submit', function (event: Event) {
-  event.preventDefault();
-  hideErrorMessages(this);
-  checkEmail(email);
-  checkConfirmPassword(password, password2);
-  checkForEmptyFields(userName, email, password, password2);
-  if (canISendForm(this)) setTimeout(() => window.alert('Formulário enviado!'), 50);
-});
+if (form) {
+  form.addEventListener('submit', function (event: Event) {
+    event.preventDefault();
+    hideErrorMessages(this);
+    checkEmail(email);
+    checkConfirmPassword(password, password2);
+    checkForEmptyFields(userName, email, password, password2);
+    if (canISendForm(this)) setTimeout(() => window.alert('Formulário enviado!'), 50);
+  });
+}
 
 function checkConfirmPassword(password: HTMLInputElement, password2: HTMLInputElement): void {
   if (password.value !== password2.value) {
