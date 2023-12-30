@@ -12,4 +12,8 @@ export class Uuid {
     public static generateUuid(): Uuid {
         return new Uuid(v4());
     }
+
+    public getValue(): string {
+        return this.value;
+    }
 }
