@@ -2,6 +2,7 @@ import knex, { Knex } from "knex";
 import { Customer } from "../../../model/Customer";
 import { CustomerRepository } from "../../../model/repository/CustomerRepository";
 import { development } from "./KnexConfig";
+import { Uuid } from "../../../model/Uuid";
 
 export class CustomerRepositoryDatabase implements CustomerRepository {
     private connection: Knex;
@@ -10,7 +11,7 @@ export class CustomerRepositoryDatabase implements CustomerRepository {
         this.connection = knex(development);
     }
 
-    public async findAll(): Promise<Customer[]> {
+    public async findAll(): Promise<Array<Customer>> {
         const customerCollection: Array<Customer> = [];
         const customersDb = await this.connection("customer").select("*");
 
@@ -23,6 +24,25 @@ export class CustomerRepositoryDatabase implements CustomerRepository {
         });
 
         return customerCollection;
+    }
+
+    public async findById(id: Uuid): Promise<Customer> {
+        const customerDb = await this.connection("customer")
+            .select("*")
+            .where({ "id": id.getValue() })
+            .limit(1);
+
+        if (!customerDb) {
+            throw new Error("Usuário não encontrado!");
+        }
+
+        const customer: Customer = Customer.create(
+            customerDb[0]["name"],
+            customerDb[0]["document"],
+            customerDb[0]["id"],
+        );
+
+        return customer;
     }
 
     public async save(customer: Customer): Promise<void> {
