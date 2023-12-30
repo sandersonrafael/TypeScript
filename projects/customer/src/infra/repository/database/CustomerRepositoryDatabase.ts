@@ -3,6 +3,7 @@ import { Customer } from "../../../model/Customer";
 import { CustomerRepository } from "../../../model/repository/CustomerRepository";
 import { development } from "./KnexConfig";
 import { Uuid } from "../../../model/Uuid";
+import { CustomerDTO } from "../../../model/dto/CustomerDTO";
 
 export class CustomerRepositoryDatabase implements CustomerRepository {
     private connection: Knex;
@@ -51,5 +52,23 @@ export class CustomerRepositoryDatabase implements CustomerRepository {
             "name": customer.getName(),
             "document": customer.getDocument().getValue(),
         });
+    }
+
+    public async update(id: Uuid, dto: CustomerDTO): Promise<Customer> {
+        await this.connection("customer").where({
+            "id": id.getValue(),
+        }).update({
+            "name": dto.getName(),
+            "document": dto.getDocument(),
+        });
+
+        const customer: Customer = await this.findById(id);
+        return customer;
+    }
+
+    public async delete(id: Uuid): Promise<void> {
+        await this.connection("customer")
+            .delete("*")
+            .where({ "id": id.getValue() });
     }
 }

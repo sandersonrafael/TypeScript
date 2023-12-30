@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { CustomerRepository } from "../model/repository/CustomerRepository";
 import { Customer } from "../model/Customer";
+import { CustomerDTO } from "../model/dto/CustomerDTO";
+import { Uuid } from "../model/Uuid";
 
-export class CustomerCreate {
+export class CustomerUpdate {
     readonly repository: CustomerRepository;
 
     constructor(repository: CustomerRepository) {
@@ -10,10 +12,12 @@ export class CustomerCreate {
     }
 
     public async execute(request: Request, response: Response) {
+        let id: string | Uuid = request.params.id;
+        id = new Uuid(id);
         const { name, document } = request.body;
-        const customer = Customer.create(name, document);
+        const dto = new CustomerDTO(name, document);
 
-        await this.repository.save(customer);
+        const customer: Customer = await this.repository.update(id, dto);
         response.status(201).json({ customer });
     }
 }
